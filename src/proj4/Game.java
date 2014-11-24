@@ -8,6 +8,7 @@ import org.newdawn.slick.gui.TextField;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.tiled.TiledMap;
+import proj4.server.GameClient;
 
 public class Game extends BasicGameState
 {
@@ -292,7 +293,8 @@ public class Game extends BasicGameState
         }
         else if (posX > 1056 && posY < 128 && posY > 64)
         {
-          //cancelSelected();
+          
+            saveGame();
         }
         else if (posX > 1056 && posY < 64 && posY > 0)
         {
@@ -533,6 +535,13 @@ public class Game extends BasicGameState
         double tempY = Math.abs(spriteOne.getPosY() - spriteTwo.getPosY());
         double yDiff = tempY * tempY; 
         return Math.sqrt(xDiff + yDiff);
+    }
+     
+     GameClient client = new GameClient("127.0.0.1", 45000);
+    private void saveGame()
+    {
+      client.startClient();
+      System.out.println(client.savePlayer("tempPlayer", toString()));
     }
 }
 
