@@ -288,11 +288,13 @@ abstract public class Sprite
       String outString = "";
       
       outString += getType() + " ";
+      //
       outString += available + " "; //0
       outString += friendly + " "; //1
       outString += isSelected + " "; //2
-      outString += x + " "; //0
-      outString += y + " "; //1
+      //
+      outString += (int)x + " "; //0
+      outString += (int)y + " "; //1
       outString += health + " "; //2
       outString += attack + " "; //3
       outString += defense + " "; //4

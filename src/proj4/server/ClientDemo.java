@@ -16,15 +16,9 @@ public class ClientDemo
     theClient.startClient();
     while (true)
     {
-//      out.print("Enter here: ");
-//      send = reader.nextLine();
-//      theClient.sendString(send);
-//      recvdStr = theClient.recvString();
-//      out.println("Received this message from server: " + recvdStr);
-      
-      out.println(theClient.getPlayer("jmcogan"));
-      out.println(theClient.getFriendlyString("jmcogan"));
-      out.println(theClient.getEnemyString("jmcogan"));
+      out.println(theClient.getPlayer("tempPlayer"));
+      out.println(theClient.getFriendlyString("tempPlayer"));
+      out.println(theClient.getEnemyString("tempPlayer"));
       recvdStr = (theClient.exitServer());
       if (recvdStr.equals("Exiting server..."))
       {

@@ -510,14 +510,19 @@ public class Game extends BasicGameState
     {
       String outString = "";
       outString += currentLevel + " ";
-      for (Sprite character : friendlyList)
+      for (int i = 0; i < friendlyList.length; ++i)
       {
-        outString += character.toString() + " ";
+        if (friendlyList[i] != null)
+        {
+          outString += friendlyList[i].toString() + " ";
+        }
       }
-      
-      for (Sprite enemy : map.getEnemyList())
+      for (int i = 0; i < map.getEnemyList().length; ++i)
       {
-        outString += enemy.toString() + " ";
+        if (map.getEnemyList()[i] != null)
+        {
+          outString += map.getEnemyList()[i].toString() + " ";
+        }
       }
       
       return outString;

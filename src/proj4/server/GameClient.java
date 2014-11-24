@@ -110,7 +110,7 @@ public class GameClient
     String temp = getPlayer(name);
     Scanner sc = new Scanner(temp);
     
-    for (int i = 0; i < 5; ++i)
+    for (int i = 0; i < 2; ++i)
     {
       sc.next();
     }
@@ -145,7 +145,19 @@ public class GameClient
         {
           out += " " + sc.next();
         }
-        return out;
+        sc.close();
+        sc = new Scanner(out);
+        int numEnemies = 0;
+        while (sc.hasNext())
+        {
+          for (int i = 0; i < Sprite.NUM_BOOLS + Sprite.NUM_VARIABLES + 1; ++i)
+          {
+            sc.next();
+          }
+          ++numEnemies;
+        }
+        
+        return numEnemies + " " + out;
       }
     }
     return "";
@@ -156,7 +168,7 @@ public class GameClient
     String temp = getPlayer(name);
     Scanner sc = new Scanner(temp);
     
-    for (int i = 0; i < 5; ++i)
+    for (int i = 0; i < 2; ++i)
     {
       sc.next();
     }
@@ -194,7 +206,18 @@ public class GameClient
         }
       }
     }
-    return out;
+    sc.close();
+    sc = new Scanner(out);
+    int numFriendlies = 0;
+    while (sc.hasNext())
+    {
+      for (int i = 0; i < Sprite.NUM_BOOLS + Sprite.NUM_VARIABLES + 1; ++i)
+      {
+        sc.next();
+      }
+      ++numFriendlies;
+    }
+    return numFriendlies + " " + out;
   }
   
   public String exitServer()
