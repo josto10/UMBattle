@@ -406,7 +406,6 @@ public class Game extends BasicGameState
 
     public static void helpEnemiesFight(float inX, float inY, String inResults)
     {
-        System.out.println("Helping attack");
         centerBattleIfOffScreen(inX + 32, inY);
         battleOutput.setText(inResults);
         battleOutputShowing = true;
