@@ -22,6 +22,7 @@ abstract public class Sprite
     protected int accuracy;
     protected int avoid;
     protected boolean isSelected;
+    public boolean canAttack;
  
     public Sprite() throws SlickException
     {

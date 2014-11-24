@@ -26,11 +26,11 @@ public class Sparty extends Sprite
     
     sprite = idle;
       
-        health = 38;
-        attack = 12;
+        health = 50;
+        attack = 20;
         defense = 7;
-        bounds = 4;
-        moves_left = 4;
+        bounds = 7;
+        moves_left = 7;
         available = true;
         friendly = false;
         accuracy = 70;

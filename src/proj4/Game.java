@@ -17,16 +17,18 @@ public class Game extends BasicGameState
   private float MoveToY = 32;
   private TextField characterData;
   private TextField enemyData;
-  private TextField battleOutput;
+  private static TextField battleOutput;
   private Sprite[] friendlyList;
   private Sprite wizard;
   private Sprite warlock;
   private boolean attackEngaged;
-  private boolean battleOutputShowing;
+  private static boolean battleOutputShowing;
   private Image selectedMenu;
   private Image deselectedMenu;
   private Image attackConfirmation;
+  private static boolean tryingToAttack;
   LevelMap map;
+  
   private float x = 32f, y = 32f;
 
   private static boolean[][] blocked;
@@ -39,6 +41,9 @@ public class Game extends BasicGameState
     
      public void init(GameContainer container, StateBasedGame game) throws SlickException
      {
+        //container.setVSync(true);
+        container.setShowFPS(false);
+        container.setSmoothDeltas(true);
         characterData = new TextField(container, container.getDefaultFont(), 1056, 608, 128, 192);
         characterData.setTextColor(new Color(255, 255, 255));
         characterData.setBackgroundColor(new Color(0,0,0,0.75f));
@@ -47,7 +52,11 @@ public class Game extends BasicGameState
         enemyData.setTextColor(new Color(255, 255, 255));
         enemyData.setBackgroundColor(new Color(0,0,0,0.75f));
         
-        battleOutput = new TextField(container, container.getDefaultFont(), 0, 0, 256, 288);
+        battleOutput = new TextField(container, container.getDefaultFont(), 0, 0, 352, 160);
+        battleOutput.deactivate();
+        battleOutput.setConsumeEvents(false);
+        battleOutput.setFocus(false);
+        battleOutput.setCursorVisible(false);
         battleOutput.setTextColor(new Color(255, 255, 255));
         battleOutput.setBackgroundColor(new Color(0,0,0,0.75f));
      }
@@ -58,6 +67,7 @@ public class Game extends BasicGameState
        map = new LevelMap();
        currentLevel = levelNum;
        map.init(levelNum);
+       
        
        // initialize the default values ** maybe go in the normal init?? **
       selectedMenu = new Image("data/SelectedMenu.png");
@@ -84,6 +94,7 @@ public class Game extends BasicGameState
     public void enter(GameContainer container, StateBasedGame game)
     {
       // Empty
+    
     }
     
     public int getID()
@@ -91,9 +102,20 @@ public class Game extends BasicGameState
         return UMBattle.GAME; // game class
     }
     
+    public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException
+    {   
+       boolean testPortal = false;
+       if (wizard != null)
+       {
+        testPortal = wizard.moveToward(MoveToX, MoveToY, delta);
+        wizard.update(delta);
+        if (testPortal) advanceLevel(game);
+       }
+     }
+    
      public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException
      {
-         map.render();
+         map.render();   
          for (Sprite friendly : friendlyList)
          {
            if (friendly != null)
@@ -139,7 +161,6 @@ public class Game extends BasicGameState
          {
            deselectedMenu.draw(1056, 0);
          }
-         
      }
 
     @Override
@@ -148,6 +169,17 @@ public class Game extends BasicGameState
       if (battleOutputShowing)
       {
         battleOutputShowing = false;
+        if (tryingToAttack)
+        {
+              try
+              {
+                EnemyTurn revengeOfTheSith = new EnemyTurn (map.getEnemyList(), friendlyList, map, 0, this);
+              }
+              catch (SlickException e)
+              {
+                e.printStackTrace();
+              }
+        }
         return;
       }
       
@@ -160,6 +192,7 @@ public class Game extends BasicGameState
           if (posX > warlock.getPosX() + 32 && posX < warlock.getPosX() + 132 + 32
              && posY > warlock.getPosY() + 32 && posY < warlock.getPosY() + 96)
           {
+         
             try
             {
               executeBattle(wizard, warlock);
@@ -253,11 +286,19 @@ public class Game extends BasicGameState
     private void clickedNotSelected(int posX, int posY)
     {
       // End Turn menu option selected
-      if (posX > 1056 && posY < 192)
-      {
-        endPlayerTurn();
-        return;
-      }
+      if (posX > 1056 && posY < 192 && posY > 128)
+        {
+          System.exit(0);
+        }
+        else if (posX > 1056 && posY < 128 && posY > 64)
+        {
+          //cancelSelected();
+        }
+        else if (posX > 1056 && posY < 64 && posY > 0)
+        {
+          endPlayerTurn();
+          return;
+        }
       
       posX = (posX / 32) * 32;
       posY = (posY / 32) * 32;
@@ -278,48 +319,32 @@ public class Game extends BasicGameState
     }
     
 
-    public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException
-    {
-      Input input = container.getInput();
-            
-        // check for change for move counter
-      boolean testPortal = false;
-      if (wizard != null)
-      {
-        testPortal = wizard.moveToward(MoveToX, MoveToY, delta);
-        wizard.update(delta);
-        if (testPortal) advanceLevel(game);
-      }
-    }
+    
 
     public void keyPressed(int key, char c)
     {
-      if (wizard == null) return;
-      
+      if (wizard == null)  return;
       if (wizard.getPosX() != MoveToX || wizard.getPosY() != MoveToY) return;
-      
-      if(wizard.getMovesLeft() == 0) return;
-
+ 
       if(key == Input.KEY_UP)
       {
+        if(wizard.getMovesLeft() == 0) return;
         MoveToY = wizard.getPosY() - 32;
       }
       else if(key == Input.KEY_DOWN)
       {
+        if(wizard.getMovesLeft() == 0) return;
         MoveToY = wizard.getPosY() + 32;
       }
       else if(key == Input.KEY_RIGHT)
       {
+        if(wizard.getMovesLeft() == 0) return;
         MoveToX = wizard.getPosX() + 32;
       }
       else if(key == Input.KEY_LEFT)
       {
+        if(wizard.getMovesLeft() == 0) return;
         MoveToX = wizard.getPosX() - 32;
-      }
-      else
-      {
-        // other key pressed
-        return;
       }
       
       //wizard.pushMoves(new Location(MoveToX, MoveToY));
@@ -327,7 +352,6 @@ public class Game extends BasicGameState
       // So it doesnt get stuck
       if (map.isBlocked(MoveToX, MoveToY) || map.isOccupied(MoveToX, MoveToY, friendlyList) != null)
       {
-        System.out.println("Im here");
         MoveToX = wizard.getPosX();
         MoveToY = wizard.getPosY();
       }
@@ -348,19 +372,6 @@ public class Game extends BasicGameState
       return result.toArray(input);
     }
     
-   
-    public void advanceLevel(StateBasedGame game) throws SlickException
-    {
-      if (currentLevel == TOTAL_NUM_LEVELS)
-      {
-        game.enterState(2);
-      }
-      else
-      {
-        ((UMBattle)game).setLevel(currentLevel + 1);
-        game.enterState(3);
-      }
-    }
     
     private void endPlayerTurn()
     {
@@ -378,6 +389,7 @@ public class Game extends BasicGameState
         if (enemy != null)
         {
           enemy.setMovesLeft(enemy.getBounds());
+          enemy.canAttack = true;
         }
       }
       
@@ -391,38 +403,19 @@ public class Game extends BasicGameState
       }
     }
 
-    public String toString()
+    public static void helpEnemiesFight(float inX, float inY, String inResults)
     {
-      String outString = "";
-      outString += currentLevel + " ";
-      for (Sprite character : friendlyList)
-      {
-        outString += character.toString() + " ";
-      }
-      
-      for (Sprite enemy : map.getEnemyList())
-      {
-        outString += enemy.toString() + " ";
-      }
-      
-      return outString;
+        System.out.println("Helping attack");
+        centerBattleIfOffScreen(inX + 32, inY);
+        battleOutput.setText(inResults);
+        battleOutputShowing = true;
     }
     
+    public static void setTryingToAttack(boolean inBool)
+    {
+        tryingToAttack = inBool;
+    }
     
-     private double getDistanceBetween(Sprite spriteOne, Sprite spriteTwo)
-    {
-        double tempX = Math.abs(spriteOne.getPosX() - spriteTwo.getPosX());
-        double xDiff = tempX * tempX; 
-        double tempY = Math.abs(spriteOne.getPosY() - spriteTwo.getPosY());
-        double yDiff = tempY * tempY; 
-        return Math.sqrt(xDiff + yDiff);
-    }
-
-    private boolean isWithinOne(Sprite attacker, Sprite defender) throws SlickException
-    {
-        return (getDistanceBetween(attacker, defender) <= 32.0f);
-    }
-    //256 * 288
     private void executeBattle(Sprite litigator, Sprite defendant) throws SlickException
     {
         if (!isWithinOne(litigator, defendant))
@@ -430,16 +423,8 @@ public class Game extends BasicGameState
             return;
         }
         attackEngaged = false;
-        
-        battleOutput.setLocation((int)warlock.getPosX() + 32, (int)warlock.getPosY());
-        
+        centerBattleIfOffScreen(warlock.getPosX() + 32, warlock.getPosY());
         BattleClass battle = new BattleClass(litigator, defendant);
-        
-        System.out.println(battle.toString(litigator, defendant));
-              
-        
-        // we move stuff
-        
         
         battleOutput.setText(battle.toString(litigator, defendant));
         battleOutputShowing = true;
@@ -489,4 +474,65 @@ public class Game extends BasicGameState
       displayString += "Accuracy: " + warlock.getAccuracy() + '\n';
       enemyData.setText(displayString);
     }
+    
+    
+    public void advanceLevel(StateBasedGame game) throws SlickException
+    {
+      if (currentLevel == TOTAL_NUM_LEVELS)
+      {
+        game.enterState(2);
+      }
+      else
+      {
+        ((UMBattle)game).setLevel(currentLevel + 1);
+        game.enterState(3);
+      }
+    }
+    
+    public static void centerBattleIfOffScreen(float inX, float inY)
+    {
+        if (inX > 800)
+        {
+            inX = 450;
+        }
+        
+        if (inY > 500)
+        {
+            inY = 300;
+        }
+        
+        battleOutput.setLocation((int)inX, (int)inY);
+    }
+    
+    public String toString()
+    {
+      String outString = "";
+      outString += currentLevel + " ";
+      for (Sprite character : friendlyList)
+      {
+        outString += character.toString() + " ";
+      }
+      
+      for (Sprite enemy : map.getEnemyList())
+      {
+        outString += enemy.toString() + " ";
+      }
+      
+      return outString;
+    }
+    
+    private boolean isWithinOne(Sprite attacker, Sprite defender) throws SlickException
+    {
+        return (getDistanceBetween(attacker, defender) <= 32.0f);
+    }
+    
+     private double getDistanceBetween(Sprite spriteOne, Sprite spriteTwo)
+    {
+        double tempX = Math.abs(spriteOne.getPosX() - spriteTwo.getPosX());
+        double xDiff = tempX * tempX; 
+        double tempY = Math.abs(spriteOne.getPosY() - spriteTwo.getPosY());
+        double yDiff = tempY * tempY; 
+        return Math.sqrt(xDiff + yDiff);
+    }
 }
+

@@ -77,7 +77,7 @@ public class BattleClass
 		else
 		{
 			// MISSED Counter
-                    counterString = "missed countering";
+                    counterString = "missed";
 		}
 	}
 
@@ -98,6 +98,10 @@ public class BattleClass
                         damageDealt = String.format("%d", potentialDamage);
  			return true;
  		}
+                else
+                {
+                    damageDealt = "0";
+                }
 
  		return false;
     }
@@ -118,13 +122,17 @@ public class BattleClass
                         counterDealt = String.format("%d", potentialDamage);
  			return true;
  		}
+                else
+                {
+                    counterDealt = "0";
+                }
 
  		return false;
     }
     
     public String toString(Sprite plaintiff, Sprite defendant)
     {
-      String result = "--- BATTLE --- \n";
+      String result = "-------- BATTLE -------- \n";
       result = result + plaintiff.getType() + " attacked " + defendant.getType() + "\n";
       result = result + plaintiff.getType() + " " + hitString + " dealing " + damageDealt + " damage\n";
       if (defendant.getHealth() <= 0)

@@ -5,6 +5,7 @@ import org.newdawn.slick.SlickException;
 
 public class EnemyTurn
 {
+    
     private Sprite [] targetList;
     private LevelMap map;
     public Game state;
@@ -84,19 +85,22 @@ public class EnemyTurn
     {
         targetList = friendlyList.clone();
        
-        for (final Sprite enemy : enemyList)
+        for (Sprite enemy : enemyList)
         {
-            if (enemy != null)
+            
+            if ((enemy != null) && (enemy.canAttack))
             {
-                // Sort to order list of targets
+                enemy.canAttack = false;
+                Game.setTryingToAttack(true);
+            
                 Arrays.sort(targetList, new Comparator<Sprite>() 
                 {
                     public int compare(Sprite spriteOne, Sprite spriteTwo) 
                     {
                         if (spriteOne == null) return 0;
                         if (spriteTwo == null) return 0;
-                        double distanceOne = getDistanceBetween(enemy, spriteOne);
-                        double distanceTwo = getDistanceBetween(enemy, spriteTwo);
+                        double distanceOne = getDistanceBetween(enemy, spriteOne.getPosX(), spriteOne.getPosY());
+                        double distanceTwo = getDistanceBetween(enemy, spriteTwo.getPosX(), spriteTwo.getPosY());
                         if (distanceOne == distanceTwo)
                         {
                           return 0;
@@ -132,37 +136,35 @@ public class EnemyTurn
 
                  if (canAttack)
                  {
-                    attackFriendly(enemy, target);
+                    attackFriendly(enemy, target); 
+                    return;
                  }
                }
             }
         }
+        
+        Game.setTryingToAttack(false);
     }
 
-    private double getDistanceBetween(Sprite spriteOne, Sprite spriteTwo)
+    private double getDistanceBetween(Sprite spriteOne, float X, float Y)
     {
-        double tempX = Math.abs(spriteOne.getPosX() - spriteTwo.getPosX());
+        double tempX = Math.abs(spriteOne.getPosX() - X);
         double xDiff = tempX * tempX; 
-        double tempY = Math.abs(spriteOne.getPosY() - spriteTwo.getPosY());
+        double tempY = Math.abs(spriteOne.getPosY() - Y);
         double yDiff = tempY * tempY; 
         return Math.sqrt(xDiff + yDiff);
     }
 
     private boolean isWithinOne(Sprite attacker, float X, float Y) throws SlickException
     {
-        Sprite temp = new MarySue();
-        temp.setX(X);
-        temp.setY(Y);
-       
-        return (getDistanceBetween(attacker, temp) <= 32.0f);
+        return (getDistanceBetween(attacker, X, Y) <= 32.0f);
     }
 
     private void attackFriendly(Sprite attacker, Sprite defender)
     {
         BattleClass battle = new BattleClass(attacker, defender);
-        System.out.println(battle.toString());
-        
-        
+        Game.helpEnemiesFight(defender.getPosX(), defender.getPosY(), battle.toString(attacker, defender));
+            
         if (attacker.getHealth() <= 0)
         {
             map.setEnemyList(state.removeElements(map.getEnemyList(), attacker));
