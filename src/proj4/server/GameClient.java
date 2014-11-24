@@ -10,6 +10,7 @@ import java.util.Vector;
 import org.newdawn.slick.Game;
 
 import static java.lang.System.out;
+import proj4.Sprite;
 
 public class GameClient
 {
@@ -92,9 +93,9 @@ public class GameClient
     return (receivedString);
   }
   
-  public String savePlayer(String name, proj4.Game game)
+  public String savePlayer(String name, String data)
   {
-    sendString("SAVEPLAYER " + name + game.toString());
+    sendString("SAVEPLAYER " + name + " " + data);
     return recvString();
   }
   
@@ -102,6 +103,98 @@ public class GameClient
   {
     sendString("GETPLAYER " + name);
     return recvString();
+  }
+  
+  public String getEnemyString(String name)
+  {
+    String temp = getPlayer(name);
+    Scanner sc = new Scanner(temp);
+    
+    for (int i = 0; i < 5; ++i)
+    {
+      sc.next();
+    }
+    
+    while(sc.hasNext())
+    {
+      String guyType = sc.next();
+      boolean [] guyBools = new boolean[Sprite.NUM_BOOLS];
+      int [] guyVars = new int[Sprite.NUM_VARIABLES];
+
+      for (int i = 0; i < Sprite.NUM_BOOLS; ++i)
+      {
+        guyBools[i] = sc.nextBoolean();
+      }
+      for (int i = 0; i < Sprite.NUM_VARIABLES; ++i)
+      {
+        guyVars[i] = sc.nextInt();
+      }
+
+      if (guyBools[1] == false)
+      {
+        String out = guyType;
+        for (int i = 0; i < Sprite.NUM_BOOLS; ++i)
+        {
+          out += " " + guyBools[i];
+        }
+        for (int i = 0; i < Sprite.NUM_VARIABLES; ++i)
+        {
+          out += " " + guyVars[i];
+        }
+        while (sc.hasNext())
+        {
+          out += " " + sc.next();
+        }
+        return out;
+      }
+    }
+    return "";
+  }
+  
+  public String getFriendlyString(String name)
+  {
+    String temp = getPlayer(name);
+    Scanner sc = new Scanner(temp);
+    
+    for (int i = 0; i < 5; ++i)
+    {
+      sc.next();
+    }
+    
+    String out = "";
+    while(sc.hasNext())
+    {
+      String guyType = sc.next();
+      boolean [] guyBools = new boolean[Sprite.NUM_BOOLS];
+      int [] guyVars = new int[Sprite.NUM_VARIABLES];
+
+      for (int i = 0; i < Sprite.NUM_BOOLS; ++i)
+      {
+        guyBools[i] = sc.nextBoolean();
+      }
+      for (int i = 0; i < Sprite.NUM_VARIABLES; ++i)
+      {
+        guyVars[i] = sc.nextInt();
+      }
+      
+      if (guyBools[1] == true)
+      {
+        if (!out.equals(""))
+        {
+          out += " ";
+        }
+        out += guyType;
+        for (int i = 0; i < Sprite.NUM_BOOLS; ++i)
+        {
+          out += " " + guyBools[i];
+        }
+        for (int i = 0; i < Sprite.NUM_VARIABLES; ++i)
+        {
+          out += " " + guyVars[i];
+        }
+      }
+    }
+    return out;
   }
   
   public String exitServer()

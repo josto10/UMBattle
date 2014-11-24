@@ -7,6 +7,8 @@ import org.newdawn.slick.SlickException;
  
 abstract public class Sprite
 {
+  public static final int NUM_VARIABLES = 9;
+  public static final int NUM_BOOLS = 3;
     protected Animation sprite, idle, moved, moving, selected;
     protected float x = 32f, y = 32f;
 
@@ -286,18 +288,18 @@ abstract public class Sprite
       String outString = "";
       
       outString += getType() + " ";
-      outString += x + " ";
-      outString += y + " ";
-      outString += health + " ";
-      outString += attack + " ";
-      outString += defense + " ";
-      outString += bounds + " ";
-      outString += moves_left + " ";
-      outString += available + " ";
-      outString += friendly + " ";
-      outString += accuracy + " ";
-      outString += avoid + " ";
-      outString += isSelected;
+      outString += available + " "; //0
+      outString += friendly + " "; //1
+      outString += isSelected + " "; //2
+      outString += x + " "; //0
+      outString += y + " "; //1
+      outString += health + " "; //2
+      outString += attack + " "; //3
+      outString += defense + " "; //4
+      outString += bounds + " "; //5
+      outString += moves_left + " "; //6
+      outString += accuracy + " "; //7
+      outString += avoid; //8
       
       
       return outString;
