@@ -29,8 +29,8 @@ public class Game extends BasicGameState
   private Image deselectedMenu;
   private Image attackConfirmation;
   private static boolean tryingToAttack;
-  public static String user = "tempPlayer";
-  public static GameClient client = new GameClient("127.0.0.1", 45000);
+  private static String user = "tempPlayer";
+  GameClient client = new GameClient("127.0.0.1", 45000);
   LevelMap map;
   
   private float x = 32f, y = 32f;
@@ -41,7 +41,6 @@ public class Game extends BasicGameState
     public Game(int ID)
     {
         super();
-//        client.startClient();
     }
     
      public void init(GameContainer container, StateBasedGame game) throws SlickException
@@ -93,6 +92,7 @@ public class Game extends BasicGameState
        friendlyList[2].setY(32);
        
        // Load friendly list from server
+//       client.startClient();
 //       loadFriendlies();
        
        // no selection
@@ -551,6 +551,7 @@ public class Game extends BasicGameState
      
     private void saveGame()
     {
+      client.startClient();
       System.out.println(client.savePlayer("tempPlayer", toString()));
     }
     
@@ -582,6 +583,6 @@ public class Game extends BasicGameState
         sc.next();
         sc.next();
       }
-      sc.close();
     }
 }
+

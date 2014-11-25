@@ -105,13 +105,6 @@ public class GameClient
     return recvString();
   }
   
-  public boolean doesPlayerExist(String name)
-  {
-    sendString("DOESPLAYEREXIST " + name);
-    Scanner sc = new Scanner(recvString());
-    return sc.nextBoolean();
-  }
-  
   public String getEnemyString(String name)
   {
     String temp = getPlayer(name);
