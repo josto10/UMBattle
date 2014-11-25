@@ -2,6 +2,7 @@ package proj4;
 
 import java.awt.List;
 import java.util.LinkedList;
+import java.util.Scanner;
 import proj4.*;
 import org.newdawn.slick.*;
 import org.newdawn.slick.gui.TextField;
@@ -28,6 +29,8 @@ public class Game extends BasicGameState
   private Image deselectedMenu;
   private Image attackConfirmation;
   private static boolean tryingToAttack;
+  private static String user = "tempPlayer";
+  GameClient client = new GameClient("127.0.0.1", 45000);
   LevelMap map;
   
   private float x = 32f, y = 32f;
@@ -71,10 +74,10 @@ public class Game extends BasicGameState
        
        
        // initialize the default values ** maybe go in the normal init?? **
-      selectedMenu = new Image("data/SelectedMenu.png");
-      deselectedMenu = new Image("data/DeselectedMenu.png");
-      attackConfirmation = new Image("data/attackConfirmation.png");
-      battleOutputShowing = false;
+       selectedMenu = new Image("data/SelectedMenu.png");
+       deselectedMenu = new Image("data/DeselectedMenu.png");
+       attackConfirmation = new Image("data/attackConfirmation.png");
+       battleOutputShowing = false;
        
        // Get friendly list size from player data when we instantiate
        friendlyList = new Sprite[3];
@@ -87,6 +90,10 @@ public class Game extends BasicGameState
        friendlyList[1].setY(160);
        friendlyList[2].setX(320);
        friendlyList[2].setY(32);
+       
+       // Load friendly list from server
+//       client.startClient();
+//       loadFriendlies();
        
        // no selection
        wizard = null;
@@ -542,11 +549,40 @@ public class Game extends BasicGameState
         return Math.sqrt(xDiff + yDiff);
     }
      
-     GameClient client = new GameClient("127.0.0.1", 45000);
     private void saveGame()
     {
       client.startClient();
       System.out.println(client.savePlayer("tempPlayer", toString()));
+    }
+    
+    private void loadFriendlies() throws SlickException
+    {
+      String friendlyString = client.getFriendlyString(user);
+      System.out.println(friendlyString);
+      Scanner sc = new Scanner(friendlyString);
+      int numFriendlies = sc.nextInt();
+      friendlyList = new Sprite[numFriendlies];
+      for (int i = 0; i < numFriendlies; ++i)
+      {
+        switch (sc.next())
+        {
+          case "MarySue":
+            friendlyList[i] = new MarySue();
+            break;
+        }
+        friendlyList[i].setAvailable(sc.nextBoolean());
+        sc.next();
+        friendlyList[i].setSelected(sc.nextBoolean());
+        friendlyList[i].setX(sc.nextInt());
+        friendlyList[i].setY(sc.nextInt());
+        friendlyList[i].setHealth(sc.nextInt());
+        sc.next();
+        sc.next();
+        sc.next();
+        friendlyList[i].setMovesLeft(sc.nextInt());
+        sc.next();
+        sc.next();
+      }
     }
 }
 
