@@ -11,6 +11,10 @@ import static java.lang.System.out;
 public class Database
 {
   private static String DATABASE_PATH = "src/database.txt";
+  private static final String newPlayerString = " 0 MarySue true true false 32 "
+          + "32 100 100 10 100 100 100 3 MarySue true true false 160 160 100 "
+          + "100 10 100 100 100 3 MarySue true true false 320 32 100 100 10 100"
+          + " 100 100 3";
   private PlayerData [] players;
   
   public Database()
@@ -105,14 +109,14 @@ public class Database
     return false;
   }
   
-  public String addPlayer(String inData)
+  public String addPlayer(String name)
   {
-    if (hasPlayer(inData))
+    if (hasPlayer(name))
     {
       return ("Username taken. Player not created.");
     }
     growPlayers();
-    players[players.length - 1] = new PlayerData(inData);
+    players[players.length - 1] = new PlayerData(name + newPlayerString);
     return ("Successfully added player.");
   }
   

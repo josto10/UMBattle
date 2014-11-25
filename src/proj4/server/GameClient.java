@@ -227,6 +227,17 @@ public class GameClient
     return numFriendlies + " " + out;
   }
   
+  public String addPlayer(String name)
+  {
+    if (doesPlayerExist(name))
+    {
+      return "Player already exists. Player not created.";
+    }
+    
+    sendString("ADDPLAYER " + name);
+    return recvString();
+  }
+  
   public String exitServer()
   {
     sendString("EXITSERVER");
