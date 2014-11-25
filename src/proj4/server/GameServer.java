@@ -130,7 +130,16 @@ public class GameServer
         msg = database.getPlayer(name).getData();
         break;
       case "SAVEPLAYER":
-        msg = database.savePlayer(sc.nextLine());
+        String user = sc.next();
+        if (!database.hasPlayer(user))
+        {
+          msg = "Player does not exist. Save unsuccessful.";
+          break;
+        }
+        msg = database.savePlayer(user);
+        break;
+      case "DOESPLAYEREXIST":
+        msg = String.valueOf(database.hasPlayer(sc.next()));
         break;
       case "EXITSERVER":
         msg = "Exiting server...";
