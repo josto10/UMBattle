@@ -1,5 +1,6 @@
 package proj4;
 
+import java.util.Scanner;
 import org.lwjgl.input.Mouse;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -53,46 +54,61 @@ public class LevelMap
   
   private void initEnemyList(int level) throws SlickException
   {
+//    boolean loading = !Game.client.getEnemyString(Game.user).equals("");
+    switch (level)
+    {
+      case 0:
+        //portal: 17, 12
+        portal = new Location(32f * 17, 32f * 12);
+        break;
+      case 1:
+        //portal: 15, 12
+        portal = new Location(32f * 15, 32f * 12);
+        break;
+      case 2:
+        //portal: 32, 18
+        portal = new Location(32f * 32, 32f * 18);
+        break;
+    }
+//    if (loading)
+//    {
+//      loadEnemyList();
+//      System.out.println("loading...");
+//      return;
+//    }
     if(level == 0)
-        {
-          //portal: 17, 12
-          portal = new Location(32f * 17, 32f * 12);
-          //System.out.println(String.format("Portal is at (%f, %f)", portal.x, portal.y));
-          enemyList = new Sprite[3];
-          enemyList[0] = new Izzo();
-          enemyList[0].setX(32 * 17);
-          enemyList[0].setY(32 * 12);
-          enemyList[1] = new Sparty();
-          enemyList[1].setX(640);
-          enemyList[1].setY(320);
-          enemyList[2] = new Sparty();
-          enemyList[2].setX(640);
-          enemyList[2].setY(384);
-        }
-        else if(level == 1)
-        {
-          //portal: 15, 12
-          portal = new Location(32f * 15, 32f * 12);
-          enemyList = new Sprite[1];
-          enemyList[0] = new Izzo();
-          enemyList[0].setX(15 * 32);
-          enemyList[0].setY(12 * 32);
-        }
-        else if(level == 2)
-        {
-          //portal: 32, 18
-          portal = new Location(32f * 32, 32f * 18);
-          enemyList = new Sprite[16];
-          enemyList[0] = new Izzo();
-          enemyList[0].setX(32 * 32);
-          enemyList[0].setY(18 * 32);
-          for (int x = 1; x < 15; x++)
-          {
-              enemyList[x] = new Sparty();
-              enemyList[x].setX(2 * 32);
-              enemyList[x].setY(x * 32);
-          } 
-        }
+    {
+      enemyList = new Sprite[3];
+      enemyList[0] = new Izzo();
+      enemyList[0].setX(32 * 17);
+      enemyList[0].setY(32 * 12);
+      enemyList[1] = new Sparty();
+      enemyList[1].setX(640);
+      enemyList[1].setY(320);
+      enemyList[2] = new Sparty();
+      enemyList[2].setX(640);
+      enemyList[2].setY(384);
+    }
+    else if(level == 1)
+    {
+      enemyList = new Sprite[1];
+      enemyList[0] = new Izzo();
+      enemyList[0].setX(15 * 32);
+      enemyList[0].setY(12 * 32);
+    }
+    else if(level == 2)
+    {
+      enemyList = new Sprite[16];
+      enemyList[0] = new Izzo();
+      enemyList[0].setX(32 * 32);
+      enemyList[0].setY(18 * 32);
+      for (int x = 1; x < 15; x++)
+      {
+        enemyList[x] = new Sparty();
+        enemyList[x].setX(2 * 32);
+        enemyList[x].setY(x * 32);
+      }
+    }
   }
   
   public String getMapFile(int level)
@@ -125,9 +141,9 @@ public class LevelMap
   
   public boolean isBlocked(float x, float y)
   {
-      int xBlock = (int)x / 32;
-      int yBlock = (int)y / 32;
-      return blocked[xBlock][yBlock];
+    int xBlock = (int)x / 32;
+    int yBlock = (int)y / 32;
+    return blocked[xBlock][yBlock];
   }
   
   public Sprite isOccupied(float x, float y, Sprite[] friendlyList)
@@ -164,7 +180,7 @@ public class LevelMap
   
   public void setEnemyList(Sprite[] input)
   {
-      enemyList = input;
+    enemyList = input;
   }
   
   public static float getPortalX()
@@ -179,7 +195,39 @@ public class LevelMap
   
   public TiledMap getCurrentMap()
   {
-      return currentMap;
+    return currentMap;
   }
   
+  public void loadEnemyList() throws SlickException
+  {
+    String enemyString = Game.client.getEnemyString(Game.user);
+    Scanner sc = new Scanner(enemyString);
+    int numEnemies = sc.nextInt();
+    enemyList = new Sprite[numEnemies];
+    for (int i = 0; i < numEnemies; ++i)
+    {
+      switch (sc.next())
+      {
+        case "Sparty":
+          enemyList[i] = new Sparty();
+          break;
+        case "Izzo":
+          enemyList[i] = new Izzo();
+          break;
+      }
+      enemyList[i].setAvailable(sc.nextBoolean());
+      sc.next();
+      enemyList[i].setSelected(sc.nextBoolean());
+      enemyList[i].setX(sc.nextInt());
+      enemyList[i].setY(sc.nextInt());
+      enemyList[i].setHealth(sc.nextInt());
+      sc.next();
+      sc.next();
+      sc.next();
+      enemyList[i].setMovesLeft(sc.nextInt());
+      sc.next();
+      sc.next();
+    }
+    sc.close();
+  }
 }

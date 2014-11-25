@@ -19,6 +19,8 @@ public class ClientDemo
       out.println(theClient.getPlayer("tempPlayer"));
       out.println(theClient.getFriendlyString("tempPlayer"));
       out.println(theClient.getEnemyString("tempPlayer"));
+      out.println(theClient.doesPlayerExist("tempPlayer"));
+      out.println(theClient.doesPlayerExist("balsdlkf"));
       recvdStr = (theClient.exitServer());
       if (recvdStr.equals("Exiting server..."))
       {
