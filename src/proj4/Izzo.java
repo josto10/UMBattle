@@ -6,98 +6,113 @@ import org.newdawn.slick.SlickException;
 
 import proj4.*;
 
-
 public class Izzo extends Sprite
 {
-    Izzo() throws SlickException
-    {
-        super();
-        Image [] standing = {new Image("data/fire.png"), new Image("data/fire.png")};
-        Image [] tired = {new Image("data/fire.png"), new Image("data/fire.png")};
-        Image [] grabbed = {new Image("data/fire.png"), new Image("data/fire.png")};
-        Image [] translate = {new Image("data/fire.png"), new Image("data/fire.png")};
 
-        int [] StandingDuration = {800, 800};
-    
-        idle = new Animation(standing, StandingDuration, true);
-        moved = new Animation(tired, StandingDuration, true);
-        selected = new Animation(grabbed, StandingDuration, true);
-        moving = new Animation(translate, StandingDuration, false);
-    
-        sprite = idle;
-    
-	health = 45;
-	attack = 20;
-	defense = 5;
-	bounds = 0;
-	moves_left = 0;
-	available = true;
-	friendly = false;
-        accuracy = 50;
-        avoid = 5;
-    }
-  
-    public void draw()
+  Izzo() throws SlickException
+  {
+    super();
+    Image[] standing =
     {
-        sprite.draw(x, y);
-    }
+      new Image("data/fire.png"), new Image("data/fire.png")
+    };
+    Image[] tired =
+    {
+      new Image("data/fire.png"), new Image("data/fire.png")
+    };
+    Image[] grabbed =
+    {
+      new Image("data/fire.png"), new Image("data/fire.png")
+    };
+    Image[] translate =
+    {
+      new Image("data/fire.png"), new Image("data/fire.png")
+    };
 
-    public boolean isFriendly()
+    int[] StandingDuration =
     {
-    	return friendly;
-    }
+      800, 800
+    };
 
-    public int getHealth()
-    {
-       return health;
-    }
+    idle = new Animation(standing, StandingDuration, true);
+    moved = new Animation(tired, StandingDuration, true);
+    selected = new Animation(grabbed, StandingDuration, true);
+    moving = new Animation(translate, StandingDuration, false);
 
-    public void setHealth(int inHealth)
-    {
-        health -= inHealth;
-        if (health < 0)
-        {
-          health = 0;
-        }
-    }
+    sprite = idle;
 
-    public int getAttack()
-    {
-    	return attack;
-    }
+    health = 45;
+    attack = 20;
+    defense = 5;
+    bounds = 0;
+    moves_left = 0;
+    available = true;
+    friendly = false;
+    accuracy = 50;
+    avoid = 5;
+  }
 
-    public int getDefense()
-    {
-    	return defense;
-    }
+  public void draw()
+  {
+    sprite.draw(x, y);
+  }
 
-    public boolean isAvailable()
-    {
-    	return available;
-    }
+  public boolean isFriendly()
+  {
+    return friendly;
+  }
 
-    public void setAvailable(boolean canMove)
-    {
-    	available = canMove;
-    }
+  public int getHealth()
+  {
+    return health;
+  }
 
-    public int getBounds()
+  public void setHealth(int inHealth)
+  {
+    health -= inHealth;
+    if (health < 0)
     {
-    	return bounds;
+      health = 0;
     }
+  }
 
-     public int getAccuracy()
-    {
-        return accuracy;
-    }
+  public int getAttack()
+  {
+    return attack;
+  }
 
-    public int getAvoid()
-    {
-        return avoid;
-    }
+  public int getDefense()
+  {
+    return defense;
+  }
 
-    public String getType()
-    {
-      return "Izzo";
-    }
+  public boolean isAvailable()
+  {
+    return available;
+  }
+
+  public void setAvailable(boolean canMove)
+  {
+    available = canMove;
+  }
+
+  public int getBounds()
+  {
+    return bounds;
+  }
+
+  public int getAccuracy()
+  {
+    return accuracy;
+  }
+
+  public int getAvoid()
+  {
+    return avoid;
+  }
+
+  public String getType()
+  {
+    return "Izzo";
+  }
 }
