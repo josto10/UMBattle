@@ -44,6 +44,7 @@ public class Game extends BasicGameState
      {
         //container.setVSync(true);
         container.setShowFPS(false);
+        container.setTargetFrameRate(60);
         container.setSmoothDeltas(true);
         characterData = new TextField(container, container.getDefaultFont(), 1056, 608, 128, 192);
         characterData.setTextColor(new Color(255, 255, 255));
@@ -60,6 +61,17 @@ public class Game extends BasicGameState
         battleOutput.setCursorVisible(false);
         battleOutput.setTextColor(new Color(255, 255, 255));
         battleOutput.setBackgroundColor(new Color(0,0,0,0.75f));
+        
+        
+        characterData.deactivate();
+        characterData.setConsumeEvents(false);
+        characterData.setFocus(false);
+        characterData.setCursorVisible(false);
+        
+        enemyData.deactivate();
+        enemyData.setConsumeEvents(false);
+        enemyData.setFocus(false);
+        enemyData.setCursorVisible(false);
      }
      
      public void initNewLevel(int levelNum) throws SlickException
@@ -136,11 +148,11 @@ public class Game extends BasicGameState
          // fix poppup when it would write off the screen!!! *****
          if (warlock != null)
          {
-          attackConfirmation.draw(warlock.getPosX()+32, warlock.getPosY());
           populateCharacterData();
           populateEnemyData();
-          characterData.setLocation((int)warlock.getPosX()+32, (int)warlock.getPosY()+96);
-          enemyData.setLocation((int)warlock.getPosX()+128+32, (int)warlock.getPosY()+96);
+          Location tempLoc = new Location(0, 0);
+          tempLoc = centerConfirmationIfOffScreen(warlock.getPosX()+32, warlock.getPosY());
+          attackConfirmation.draw((int)tempLoc.x, (int)tempLoc.y);
           enemyData.render(container, g);
           characterData.render(container, g);
          }
@@ -278,8 +290,18 @@ public class Game extends BasicGameState
         if (character == null) continue;
         if (posX == character.getPosX() && posY == character.getPosY())
         {
-          warlock = character;
-          return;
+          try 
+          {
+            if (isWithinOne(wizard, character))
+            {
+                warlock = character;
+                return;
+            } 
+          }
+          catch (SlickException e)
+          {
+              e.printStackTrace();
+          }
         }
       }
     }
@@ -293,7 +315,6 @@ public class Game extends BasicGameState
         }
         else if (posX > 1056 && posY < 128 && posY > 64)
         {
-          
             saveGame();
         }
         else if (posX > 1056 && posY < 64 && posY > 0)
@@ -407,7 +428,6 @@ public class Game extends BasicGameState
 
     public static void helpEnemiesFight(float inX, float inY, String inResults)
     {
-        System.out.println("Helping attack");
         centerBattleIfOffScreen(inX + 32, inY);
         battleOutput.setText(inResults);
         battleOutputShowing = true;
@@ -505,6 +525,25 @@ public class Game extends BasicGameState
         
         battleOutput.setLocation((int)inX, (int)inY);
     }
+    
+    public Location centerConfirmationIfOffScreen(float inX, float inY)
+    {
+        if (inX > 800)
+        {
+            inX = 450;
+        }
+        
+        if (inY > 500)
+        {
+            inY = 300;
+        }
+        
+        
+        characterData.setLocation((int)inX, (int)inY + 96);
+        enemyData.setLocation((int)inX + 128, (int)inY + 96);
+        return new Location(inX, inY);
+    }
+    
     
     public String toString()
     {
