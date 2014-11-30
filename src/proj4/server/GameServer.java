@@ -14,11 +14,11 @@ import static java.lang.System.out;
 
 public class GameServer
 {
-  private int portNum;
+  private final int portNum;
   private Socket socket;
   private DataOutputStream outData;
   private DataInputStream inData;
-  private Database database;
+  private final Database database;
   
   public GameServer(int inPortNum)
   {
@@ -130,7 +130,16 @@ public class GameServer
         msg = database.getPlayer(name).getData();
         break;
       case "SAVEPLAYER":
-        msg = database.savePlayer(sc.nextLine());
+        String user = sc.next();
+        if (!database.hasPlayer(user))
+        {
+          msg = "Player does not exist. Save unsuccessful.";
+          break;
+        }
+        msg = database.savePlayer(user);
+        break;
+      case "DOESPLAYEREXIST":
+        msg = String.valueOf(database.hasPlayer(sc.next()));
         break;
       case "EXITSERVER":
         msg = "Exiting server...";

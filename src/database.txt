@@ -1,4 +1,2 @@
- tempPlayer 0 MarySue true true false 32.0 32.0 100 100 10 100 100 100 3 MarySue true true false 160.0 160.0 100 100 10 100 100 100 3 MarySue true true false 320.0 32.0 100 100 10 100 100 100 3 Izzo true false false 544.0 384.0 45 20 5 0 0 50 5 Sparty true false false 640.0 320.0 50 20 7 7 7 70 10 Sparty true false false 640.0 384.0 50 20 7 7 7 70 10 
-abcdef 0 26 2 16
-newguy 1 1 1 1
-noooo 1 1 1 1
+ tempPlayer 0 MarySue true true false 32 32 100 100 10 100 100 100 3 MarySue true true false 160 160 100 100 10 100 100 100 3 MarySue true true false 320 32 100 100 10 100 100 100 3 Izzo true false false 544 384 45 20 5 0 0 50 5 Sparty true false false 640 320 50 20 7 7 7 70 10 Izzo true false false 640 384 50 20 7 7 7 70 10 
+ newPlayer 0 MarySue true true false 32 32 100 100 10 100 100 100 3 MarySue true true false 160 160 100 100 10 100 100 100 3 MarySue true true false 320 32 100 100 10 100 100 100 3
