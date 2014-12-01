@@ -3,6 +3,7 @@ package proj4;
 import java.util.Stack;
 
 import org.newdawn.slick.Animation;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
 abstract public class Sprite
@@ -29,7 +30,38 @@ abstract public class Sprite
 
   public Sprite() throws SlickException
   {
-    // instantiate movement stack
+    // set up images
+      
+    String imageFilePath = "data/" + getType();
+      
+    Image[] standing =
+    {
+      new Image(imageFilePath + "Idle1.png"), new Image(imageFilePath + "Idle2.png")
+    };
+    Image[] tired =
+    {
+      new Image(imageFilePath + "Moved1.png"), new Image(imageFilePath + "Moved2.png")
+    };
+    Image[] grabbed =
+    {
+      new Image(imageFilePath + "Selected1.png"), new Image(imageFilePath + "Selected2.png")
+    };
+    Image[] translate =
+    {
+      new Image(imageFilePath + "Moving1.png"), new Image(imageFilePath + "Moving2.png")
+    };
+
+    int[] StandingDuration =
+    {
+      800, 800
+    };
+
+    idle = new Animation(standing, StandingDuration, true);
+    moved = new Animation(tired, StandingDuration, true);
+    selected = new Animation(grabbed, StandingDuration, true);
+    moving = new Animation(translate, StandingDuration, false);
+    sprite = idle;
+  
     moves = new Stack<>();
   }
 

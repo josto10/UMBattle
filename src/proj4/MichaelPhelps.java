@@ -2,31 +2,31 @@ package proj4;
 
 import org.newdawn.slick.SlickException;
 
-public class Sparty extends Sprite
+public class MichaelPhelps extends Sprite
 {
-    Sparty() throws SlickException
+    MichaelPhelps() throws SlickException
     {
         super();
-	
+      
         // Set Attributes
-        health = 24;
-        attack = 10;
-        defense = 7;
+        health = 21;
+        attack = 12;
+        defense = 5;
         bounds = 4;
         moves_left = 4;
         available = true;
-        friendly = false;
-        accuracy = 100;
-        avoid = 15;
+        friendly = true;
+        accuracy = 90;
+        avoid = 25;
     }
-    
+  
     public void draw()
     {
         sprite.draw(x, y);
     }
-    
+
     public String getType()
     {
-        return "Sparty";
+        return "MichaelPhelps";
     }
 }
