@@ -1,2 +1,0 @@
-joseph 0 MarySue true true false 32 32 100 16 10 4 100 100 40 MarySue true true false 160 160 100 16 10 4 100 100 40 MarySue true true false 320 32 100 16 10 4 100 100 40 TomIzzo true false false 480 384 41 13 5 0 0 100 30 
-jack 0 MarySue true true false 32 32 100 100 10 100 100 100 3 MarySue true true false 160 160 100 100 10 100 100 100 3 MarySue true true false 320 32 100 100 10 100 100 100 3
