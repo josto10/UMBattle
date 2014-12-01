@@ -219,6 +219,11 @@ abstract public class Sprite
       health = 0;
     }
   }
+  
+  public void initHealth(int inHealth)
+  {
+    health = inHealth;
+  }
 
   public boolean isAvailable()
   {
