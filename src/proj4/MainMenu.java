@@ -95,12 +95,13 @@ public class MainMenu extends BasicGameState
     {
       if (Mouse.isButtonDown(0))
       {
-        System.out.println(nameInput.getText());
+        System.out.println("New game");
         
         String inText = nameInput.getText();
         
         if (inText.length() > 2)
         {
+            Game.isNewGame = true;
             ((UMBattle) sbg).help(0, nameInput.getText());
             sbg.enterState(1);
         } 
@@ -112,12 +113,13 @@ public class MainMenu extends BasicGameState
     {
       if (Mouse.isButtonDown(0))
       {
-        System.out.println(nameInput.getText());
+        System.out.println("Load game");
         
         String inText = nameInput.getText();
         
         if (inText.length() > 2)
         {
+            Game.isNewGame = false;
             ((UMBattle) sbg).help(0, nameInput.getText());
             sbg.enterState(1);
         }

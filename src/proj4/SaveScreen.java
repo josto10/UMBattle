@@ -48,12 +48,24 @@ public class SaveScreen extends BasicGameState
     int posX = Mouse.getX();
     int posY = Mouse.getY();
 
-    if ((posX > 0 && posX < 1184) && (posY > 0 && posY < 800))
+    // Save and Continue
+    if ((posX > 440 && posX < 745) && ((800 - posY) > 400 && (800 - posY) < 480))
     {
       if (Mouse.isButtonDown(0))
       {
+        System.out.println("Save and Continue");
         ((UMBattle) sbg).help(nextLevel, Game.user);
         sbg.enterState(1);
+      }
+    }
+    
+    // Save and Quit
+    if ((posX > 440 && posX < 745) && ((800 - posY) > 520 && (800 - posY) < 600))
+    {
+      if (Mouse.isButtonDown(0))
+      {
+        System.out.println("Save and Quit");
+        sbg.enterState(0);
       }
     }
   }
