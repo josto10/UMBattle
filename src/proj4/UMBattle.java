@@ -10,7 +10,6 @@ import org.newdawn.slick.tiled.TiledMap;
 
 public class UMBattle extends StateBasedGame
 {
-
   // Game state identifiers
 
   public static final int MAINMENU = 0;

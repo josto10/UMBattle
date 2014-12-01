@@ -155,23 +155,23 @@ public class LevelMap
   {
     if(level == 0)
     {
-      return "data/Diag.tmx";
+      return "data/MoJoREAL.tmx";
     }
     else if(level == 1)
     {
-      return "data/BigHouse.tmx";
+      return "data/CCLittleREAL.tmx";
     }
     else if(level == 2)
     {
-      return "data/CCLittle.tmx";
+      return "data/DiagREAL.tmx";
     }
     else if(level == 3)
     {
-      return "data/CCLittle.tmx";
+      return "data/UnionREAL.tmx";
     }
     else if(level == 4)
     {
-      return "data/CCLittle.tmx";
+      return "data/BigHouseREAL.tmx";
     }
     
     return null;
