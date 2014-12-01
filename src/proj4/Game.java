@@ -614,6 +614,36 @@ public class Game extends BasicGameState
         case "MarySue":
           friendlyList[i] = new MarySue();
           break;
+        case "You":
+          friendlyList[i] = new You();
+          break;
+        case "DenardRobinson":
+          friendlyList[i] = new DenardRobinson();
+          break;
+        case "BradyHoke":
+          friendlyList[i] = new BradyHoke();
+          break;
+        case "TomBrady":
+          friendlyList[i] = new TomBrady();
+          break;
+        case "MarkSchlissel":
+          friendlyList[i] = new MarkSchlissel();
+          break;
+        case "JamesEarlJones":
+          friendlyList[i] = new JamesEarlJones();
+          break;
+        case "GeraldFord":
+          friendlyList[i] = new GeraldFord();
+          break;
+        case "LarryPage":
+          friendlyList[i] = new LarryPage();
+          break;
+        case "MichaelPhelps":
+          friendlyList[i] = new MichaelPhelps();
+          break;
+        case "StephenMRoss":
+          friendlyList[i] = new StephenMRoss();
+          break;
       }
       friendlyList[i].setAvailable(sc.nextBoolean());
       sc.next();

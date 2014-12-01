@@ -93,7 +93,7 @@ public class LevelMap
     if(level == 0)
     {
       enemyList = new Sprite[3];
-      enemyList[0] = new Izzo();
+      enemyList[0] = new TomIzzo();
       enemyList[0].setX(32 * 17);
       enemyList[0].setY(32 * 12);
       enemyList[1] = new Sparty();
@@ -106,14 +106,14 @@ public class LevelMap
     else if(level == 1)
     {
       enemyList = new Sprite[1];
-      enemyList[0] = new Izzo();
+      enemyList[0] = new TomIzzo();
       enemyList[0].setX(15 * 32);
       enemyList[0].setY(12 * 32);
     }
     else if(level == 2)
     {
       enemyList = new Sprite[16];
-      enemyList[0] = new Izzo();
+      enemyList[0] = new TomIzzo();
       enemyList[0].setX(32 * 32);
       enemyList[0].setY(18 * 32);
       for (int x = 1; x < 15; x++)
@@ -126,7 +126,7 @@ public class LevelMap
     else if(level == 3)
     {
       enemyList = new Sprite[16];
-      enemyList[0] = new Izzo();
+      enemyList[0] = new TomIzzo();
       enemyList[0].setX(32 * 32);
       enemyList[0].setY(18 * 32);
       for (int x = 1; x < 15; x++)
@@ -139,7 +139,7 @@ public class LevelMap
     else if(level == 4)
     {
       enemyList = new Sprite[16];
-      enemyList[0] = new Izzo();
+      enemyList[0] = new TomIzzo();
       enemyList[0].setX(32 * 32);
       enemyList[0].setY(18 * 32);
       for (int x = 1; x < 15; x++)
@@ -258,8 +258,29 @@ public class LevelMap
         case "Sparty":
           enemyList[i] = new Sparty();
           break;
-        case "Izzo":
-          enemyList[i] = new Izzo();
+        case "TomIzzo":
+          enemyList[i] = new TomIzzo();
+          break;
+        case "Student":
+          enemyList[i] = new Student();
+          break;
+        case "FootballPlayer":
+          enemyList[i] = new FootballPlayer();
+          break;
+        case "BasketballPlayer":
+          enemyList[i] = new BasketballPlayer();
+          break;
+        case "ConnorCook":
+          enemyList[i] = new ConnorCook();
+          break;
+        case "LouAnnaSimon":
+          enemyList[i] = new LouAnnaSimon();
+          break;
+        case "AdreianPayne":
+          enemyList[i] = new AdreianPayne();
+          break;
+        case "MarkDantonio":
+          enemyList[i] = new MarkDantonio();
           break;
       }
       enemyList[i].setAvailable(sc.nextBoolean());
