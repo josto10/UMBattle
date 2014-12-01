@@ -17,7 +17,8 @@ public class ClientDemo
     while (true)
     {
       out.println(theClient.addPlayer("newPlayer"));
-      out.println(theClient.addPlayer("tempPlayer"));
+      out.println(theClient.resetPlayer("newPlayer"));
+      out.println(theClient.resetPlayer("asdfasdf"));
       recvdStr = (theClient.exitServer());
       if (recvdStr.equals("Exiting server..."))
       {
