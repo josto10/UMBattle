@@ -607,11 +607,11 @@ public class Game extends BasicGameState
     
   }
 
-  private void loadFriendlies() throws SlickException
+  private int loadFriendlies() throws SlickException
   {
     String friendlyString = client.getFriendlyString(user);
-    System.out.println(friendlyString);
     Scanner sc = new Scanner(friendlyString);
+    int levelNum = sc.nextInt();
     int numFriendlies = sc.nextInt();
     friendlyList = new Sprite[numFriendlies];
     for (int i = 0; i < numFriendlies; ++i)
@@ -666,5 +666,6 @@ public class Game extends BasicGameState
       sc.next();
     }
     sc.close();
+    return levelNum;
   }
 }

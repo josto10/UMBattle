@@ -173,13 +173,12 @@ public class GameClient
   public String getFriendlyString(String name)
   {
     String temp = getPlayer(name);
+    out.println(temp);
     Scanner sc = new Scanner(temp);
     
-    for (int i = 0; i < 2; ++i)
-    {
-      sc.next();
-    }
+    sc.next();
     
+    String level = sc.next();
     String out = "";
     while(sc.hasNext())
     {
@@ -224,7 +223,7 @@ public class GameClient
       }
       ++numFriendlies;
     }
-    return numFriendlies + " " + out;
+    return level + " " + numFriendlies + " " + out;
   }
   
   public String addPlayer(String name)
