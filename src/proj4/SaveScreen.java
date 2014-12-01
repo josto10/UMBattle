@@ -25,7 +25,21 @@ public class SaveScreen extends BasicGameState
 
   public void init(GameContainer container, StateBasedGame game) throws SlickException
   {
-    winner = new Image("data/SaveContinueScreen.png");
+    switch (nextLevel)
+    {
+        case 1:
+            winner = new Image("data/SaveContinueScreen1-2.png");
+            break;
+        case 2:
+            winner = new Image("data/SaveContinueScreen2-3.png");
+            break;
+        case 3:
+            winner = new Image("data/SaveContinueScreen3-4.png");
+            break;
+        case 4:
+            winner = new Image("data/SaveContinueScreen4-5.png");
+            break;
+    }
   }
 
   public void enter(GameContainer container, StateBasedGame game) throws SlickException

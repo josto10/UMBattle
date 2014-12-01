@@ -88,7 +88,7 @@ public class Game extends BasicGameState
    {
      // Get the map
      map = new LevelMap();
-     currentLevel = levelNum;
+     currentLevel = loadFriendlies();
      map.init(levelNum);
      
     user = userName;
@@ -100,10 +100,11 @@ public class Game extends BasicGameState
     
     if (!client.doesPlayerExist(userName))
     {
+        System.out.println("HERE");
         client.addPlayer(userName);
     }
 
-    loadFriendlies();
+    
     wizard = null;
    }
 
@@ -598,7 +599,7 @@ public class Game extends BasicGameState
       
       try
       {
-          System.out.println(client.savePlayer("tempPlayer", toString()));
+          System.out.println(client.savePlayer(user, toString()));
       }
       catch (NullPointerException e)
       {

@@ -24,7 +24,7 @@ public class WinnerScreen extends BasicGameState
 
   public void init(GameContainer container, StateBasedGame game) throws SlickException
   {
-    winner = new Image("data/WINNER.jpg");
+    winner = new Image("data/SaveContinueScreenPostVictory.png");
   }
 
   public void enter(GameContainer container, StateBasedGame game) throws SlickException

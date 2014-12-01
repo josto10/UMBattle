@@ -59,7 +59,7 @@ public class LevelMap
     {
       case 0:
         //portal: 17, 12
-        portal = new Location(32f * 17, 32f * 12);
+        portal = new Location(32f * 29, 32f * 22);
         break;
           
       case 1:
