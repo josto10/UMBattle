@@ -28,7 +28,7 @@ abstract public class Sprite
  
     public Sprite() throws SlickException
     {
-      // instantiate movement stack
+      // instantiate movement stack 
       moves = new Stack<>(); 
     }
     
