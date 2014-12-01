@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="37" height="25" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="mc textures for 285" tilewidth="32" tileheight="32">
+  <image source="mc textures for 285.jpg" width="1536" height="1024"/>
+  <tile id="213">
+   <properties>
+    <property name="Blocked" value="true"/>
+   </properties>
+  </tile>
+ </tileset>
+ <layer name="Tile Layer 1" width="37" height="25">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC7vGwMBwbRDiGYwDi7G5yQOKQfIeDKiYUjF1Jtx4IN10ghETU+ImbJgUdTA3IYfPYHETcvgMBjcRSk/IegYinLClJ2LdBGOj06SqIyY9DZSbcIXTazQ8GNLT60GYnmBugrmT3uUTMo0cXzA35Y3wcBqK6Wmw5buhXo5T201DLZyIbRdQs26hVjuTXvXdQLczB1Objpy272DDADNzqLZ0DgAA
+  </data>
+ </layer>
+</map>

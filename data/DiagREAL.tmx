@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="37" height="25" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="mc textures for 285" tilewidth="32" tileheight="32">
+  <image source="mc textures for 285.jpg" width="1536" height="1024"/>
+  <tile id="213">
+   <properties>
+    <property name="Blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="495">
+   <properties>
+    <property name="Blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="547">
+   <properties>
+    <property name="Blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="677">
+   <properties>
+    <property name="Blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="742">
+   <properties>
+    <property name="Blocked" value="true"/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="1537" name="M" tilewidth="32" tileheight="32">
+  <image source="M.png" width="32" height="32"/>
+ </tileset>
+ <layer name="Tile Layer 1" width="37" height="25">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC82XzQ3CMAyF0x4YoYdeuGQWxmIMRusKvTICqqil5PFsx1FAHJ4QrR1/8U/abiml7Q+1zrWWQnhvHXAP77cwaf7PKcYk9rgeijFZ9ix+NE/e2r1MI8T2EKldpL8ifvupViZmz3K/OjE0nx1k5cyzX0gcywftyn3cT3l19OwXIx76sHx+mwnjlj7WnLb2oNbjrBbHL543j/Qp7Txr6UGNifUIrnnEQo7yf8mO/l6fa3liPaIxlfVqYfJ6is1dhElYpkvNFWHCfAmTl0/WT1aevH6y6ljmyconmyOrn6y5w31jXGTy8oTzrs2ddj6xvFhM0XM88twdeWbi+1IVJ+nSfEYwsXrJtaxwZcUPZ5Fx9Lw/Hf639FaedYlNa717mSSO8FwNZbDvYdLmnz1PpW4eU2S9Ed8tPUzWuj3fWr/WCyZ+i/50DgAA
+  </data>
+ </layer>
+</map>
