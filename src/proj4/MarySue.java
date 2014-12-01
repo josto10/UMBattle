@@ -9,7 +9,7 @@ public class MarySue extends Sprite
 	super();
 
         // Set Attributes
-	health = 153;
+	health = 53;
 	attack = 16;
 	defense = 10;
 	bounds = 4;

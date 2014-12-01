@@ -55,6 +55,11 @@ public class UMBattle extends StateBasedGame
   {
     ((Game) getState(GAME)).initNewLevel(level, userName);
   }
+  
+   public void quitGame() throws SlickException
+  {
+    enterState(0);
+  }
 
   public void setLevel(int level) throws SlickException
   {

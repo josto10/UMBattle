@@ -67,31 +67,65 @@ public class MainMenu extends BasicGameState
 
   public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException
   {
+    nameInput.setFocus(true);
+    nameInput.setCursorVisible(true);
+    
     int posX = Mouse.getX();
     int posY = Mouse.getY();
 
-    // There will be two "play" buttons:
-    // 1) New Game
-    // 2) Load Game
-    // The Load Game will attempt to contact the server to load player data.
-    // potentially offer a choice between internet load and local load. Then
-    // the user can play without an internet connection if they have the 
-    // save file local on their computer. (obfuscate save so it's hard to
-    // hack? -- moderate stretch goal). 
-    
-    // New Game will lauch and interface to set up a game. The user will
-    // create a character and a name for the save files.
-    if ((posX > 510 && posX < 760) && (posY > 400 && posY < 465))
+    // IN TEXT FIELD
+    if ((posX > nameInput.getX() && posX < (nameInput.getX() + nameInput.getWidth())) 
+            && ((800 - posY) > nameInput.getY() && (800 - posY) < (nameInput.getY() + nameInput.getHeight())))
     {
       if (Mouse.isButtonDown(0))
       {
-        Game.iWantToLoad = true;
-        ((UMBattle) sbg).help(0, nameInput.getText());
-        sbg.enterState(1);
+        //System.out.print("Hey, ");
+        //System.out.println(nameInput.getText());
+      }
+    }
+    
+    // new 440, 360
+    // load 440, 482
+    // quit 440, 592
+    
+    // width 310, height 80
+  
+    // NEW
+    if ((posX > 440 && posX < 750) && ((800 - posY) > 360 && (800 - posY) < 440))
+    {
+      if (Mouse.isButtonDown(0))
+      {
+        System.out.println(nameInput.getText());
+        
+        String inText = nameInput.getText();
+        
+        if (inText.length() > 2)
+        {
+            ((UMBattle) sbg).help(0, nameInput.getText());
+            sbg.enterState(1);
+        } 
+      }
+    }
+    
+    // LOAD
+    if ((posX > 440 && posX < 750) && ((800 - posY) > 482 && (800 - posY) < 562))
+    {
+      if (Mouse.isButtonDown(0))
+      {
+        System.out.println(nameInput.getText());
+        
+        String inText = nameInput.getText();
+        
+        if (inText.length() > 2)
+        {
+            ((UMBattle) sbg).help(0, nameInput.getText());
+            sbg.enterState(1);
+        }
       }
     }
 
-    if ((posX > 510 && posX < 760) && (posY > 290 && posY < 355))
+    // QUIT
+    if ((posX > 440 && posX < 750) && ((800 - posY) > 592 && (800 - posY) < 672))
     {
       if (Mouse.isButtonDown(0))
       {

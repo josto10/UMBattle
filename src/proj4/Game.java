@@ -14,7 +14,6 @@ import proj4.server.GameClient;
 public class Game extends BasicGameState
 {
   public static final int TOTAL_NUM_LEVELS = 2;
-  public static boolean iWantToLoad;
   private int currentLevel;
   private float MoveToX = 32;
   private float MoveToY = 32;
@@ -34,7 +33,7 @@ public class Game extends BasicGameState
   public static String user = "tempPlayer";
   public static GameClient client = new GameClient("127.0.0.1", 45000);
   LevelMap map;
-  
+  private StateBasedGame mainGameReference;
   private float x = 32f, y = 32f;
 
   private static boolean[][] blocked;
@@ -77,46 +76,33 @@ public class Game extends BasicGameState
     enemyData.setConsumeEvents(false);
     enemyData.setFocus(false);
     enemyData.setCursorVisible(false);
+    
+    selectedMenu = new Image("data/SelectedMenu.png");
+    deselectedMenu = new Image("data/DeselectedMenu.png");
+    attackConfirmation = new Image("data/attackConfirmation.png");
+    battleOutputShowing = false;
    }
 
    public void initNewLevel(int levelNum, String userName) throws SlickException
    {
-    user = userName;
-       
      // Get the map
      map = new LevelMap();
      currentLevel = levelNum;
      map.init(levelNum);
+     
+    user = userName;
+    if (!client.doesPlayerExist(userName))
+    {
+        client.addPlayer(userName);
+    }
 
-     selectedMenu = new Image("data/SelectedMenu.png");
-     deselectedMenu = new Image("data/DeselectedMenu.png");
-     attackConfirmation = new Image("data/attackConfirmation.png");
-     battleOutputShowing = false;
-
-     if (iWantToLoad)
-     {
-         loadFriendlies();
-     }
-     else
-     {
-         friendlyList = new Sprite[3];
-         friendlyList[0] = new MarySue();
-         friendlyList[1] = new MarySue();
-         friendlyList[2] = new MarySue();
-         friendlyList[0].setX(32);
-         friendlyList[0].setY(32);
-         friendlyList[1].setX(160);
-         friendlyList[1].setY(160);
-         friendlyList[2].setX(320);
-         friendlyList[2].setY(32);
-     }
-  
-     wizard = null;
+    loadFriendlies();
+    wizard = null;
    }
 
   public void enter(GameContainer container, StateBasedGame game)
   {
-    // Empty
+    mainGameReference = game;
   }
 
   public int getID()
@@ -330,7 +316,7 @@ public class Game extends BasicGameState
     // End Turn menu option selected
     if (posX > 1056 && posY < 192 && posY > 128)
       {
-          System.exit(0);
+          mainGameReference.enterState(0);
       }
       else if (posX > 1056 && posY < 128 && posY > 64)
       {
