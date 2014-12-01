@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="37" height="25" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="Grass" tilewidth="32" tileheight="32">
+  <image source="Grass.png" width="32" height="32"/>
+ </tileset>
+ <tileset firstgid="2" name="Maize" tilewidth="32" tileheight="32">
+  <image source="Yellow.png" width="32" height="32"/>
+ </tileset>
+ <tileset firstgid="3" name="Brick" tilewidth="32" tileheight="32">
+  <image source="Brick.png" width="32" height="32"/>
+  <tile id="0">
+   <properties>
+    <property name="Blocked" value="true"/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="4" name="Blue" tilewidth="32" tileheight="32">
+  <image source="Blue.png" width="32" height="32"/>
+ </tileset>
+ <tileset firstgid="5" name="BlockM" tilewidth="32" tileheight="32">
+  <image source="BlockM.png" width="192" height="128"/>
+  <tile id="8">
+   <properties>
+    <property name="Portal" value="true"/>
+   </properties>
+  </tile>
+ </tileset>
+ <layer name="Tile Layer 1" width="37" height="25">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA+2X2w6CMAyGp0zxrHg+vf9z+nthsjQdrNCOXXjxhaSQ7qPd2Kicc1WBTAM8udK4NZwTJZeLxCnm6JmYpZPVeJp14rysXKlTbH5LeqrlRPPlWuNddfKB2zc2MUDqRON/p+FOMzAHNViAJVgpO3FzvC33GmzAFuzAHhyM6pQ6xxtwBCdwBhdwHbl3N3AHD/AEL/Ae2anEOZ7byWdwatvj+6477Tp5l9a7FOh42vsdV8fYu6Tel+QLv0NdTrHea5xNuBx9zr7WSP4RhtQo9jzN/VvzJfIBMnwkPnQOAAA=
+  </data>
+ </layer>
+</map>
