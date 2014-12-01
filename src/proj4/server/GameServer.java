@@ -141,6 +141,9 @@ public class GameServer
       case "DOESPLAYEREXIST":
         msg = String.valueOf(database.hasPlayer(sc.next()));
         break;
+      case "RESETPLAYER":
+        msg = database.resetPlayer(sc.next());
+        break;
       case "EXITSERVER":
         msg = "Exiting server...";
         break;

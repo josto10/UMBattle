@@ -238,6 +238,12 @@ public class GameClient
     return recvString();
   }
   
+  public String resetPlayer(String name)
+  {
+    sendString("RESETPLAYER " + name);
+    return recvString();
+  }
+  
   public String exitServer()
   {
     sendString("EXITSERVER");

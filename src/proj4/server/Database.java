@@ -156,6 +156,16 @@ public class Database
     return "Successfully saved player.";
   }
   
+  public String resetPlayer(String name)
+  {
+    if (hasPlayer(name))
+    {
+      getPlayer(name).setData(name + newPlayerString);
+      return "Player reset.";
+    }
+    return "Player does not exist. Player not reset.";
+  }
+  
   public String toString()
   {
     String out = "";
