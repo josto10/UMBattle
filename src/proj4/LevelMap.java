@@ -29,7 +29,7 @@ public class LevelMap
     
   }
   
-  public void init(int levelNum) throws SlickException
+  public void init(int levelNum, boolean loading) throws SlickException
   {
     currentMap = new TiledMap(getMapFile(levelNum));
 
@@ -49,16 +49,15 @@ public class LevelMap
          }
      }
 
-    initEnemyList(levelNum);
+    initEnemyList(levelNum, loading);
   }
   
-  private void initEnemyList(int level) throws SlickException
+  private void initEnemyList(int level, boolean loading) throws SlickException
   {
-    //boolean loading = !Game.client.getEnemyString(Game.user).equals("");
     switch (level)
     {
       case 0:
-        //portal: 17, 12
+        //portal: 29, 22
         portal = new Location(32f * 29, 32f * 22);
         break;
           
@@ -83,12 +82,12 @@ public class LevelMap
         break;
     }
     
-    /*if (loading)
+    if (loading)
     {
         loadEnemyList();
         System.out.println("loading...");
         return;
-    }*/
+    }
     
     if(level == 0)
     {

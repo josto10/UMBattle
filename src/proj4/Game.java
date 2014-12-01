@@ -39,6 +39,9 @@ public class Game extends BasicGameState
 
   private static boolean[][] blocked;
   private static final int SIZE = 32;
+  
+  private Image openingText;
+  private boolean isOpeningTextShowing;
     
   public Game(int ID)
   {
@@ -86,26 +89,26 @@ public class Game extends BasicGameState
 
    public void initNewLevel(int levelNum, String userName) throws SlickException
    {
-     // Get the map
-     map = new LevelMap();
-     currentLevel = loadFriendlies();
-     map.init(levelNum);
-     
     user = userName;
-    
-    if (isNewGame)
-    {
-        // DO SOMETHING
-    }
-    
+     
     if (!client.doesPlayerExist(userName))
     {
-        System.out.println("HERE");
         client.addPlayer(userName);
     }
-
-    
-    wizard = null;
+    else if (isNewGame)
+    {
+        client.resetPlayer(user);
+        
+        openingText = new Image("data/WINNER.png");
+        isOpeningTextShowing = true;
+    }
+     
+     // Get the map
+     currentLevel = loadFriendlies();
+     map = new LevelMap();
+     map.init(levelNum, (!isNewGame));
+  
+     wizard = null;
    }
 
   public void enter(GameContainer container, StateBasedGame game)
@@ -187,11 +190,23 @@ public class Game extends BasicGameState
     {
       deselectedMenu.draw(1056, 0);
     }
+    
+    if (isOpeningTextShowing)
+    {
+        openingText.draw(0, 0, 1184, 800);
+    }
   }
 
   @Override
   public void mousePressed(int button, int posX, int posY)
   { 
+    if (isOpeningTextShowing)
+    {
+       isOpeningTextShowing = false;
+    }
+      
+      
+      
     if (battleOutputShowing)
     {
       battleOutputShowing = false;
