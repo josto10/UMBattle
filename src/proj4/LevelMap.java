@@ -288,7 +288,7 @@ public class LevelMap
       enemyList[i].setSelected(sc.nextBoolean());
       enemyList[i].setX(sc.nextInt());
       enemyList[i].setY(sc.nextInt());
-      enemyList[i].setHealth(sc.nextInt());
+      enemyList[i].initHealth(sc.nextInt());
       sc.next();
       sc.next();
       sc.next();

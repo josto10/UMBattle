@@ -650,7 +650,7 @@ public class Game extends BasicGameState
       friendlyList[i].setSelected(sc.nextBoolean());
       friendlyList[i].setX(sc.nextInt());
       friendlyList[i].setY(sc.nextInt());
-      friendlyList[i].setHealth(sc.nextInt());
+      friendlyList[i].initHealth(sc.nextInt());
       sc.next();
       sc.next();
       sc.next();
