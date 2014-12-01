@@ -54,7 +54,7 @@ public class LevelMap
   
   private void initEnemyList(int level) throws SlickException
   {
-    // boolean loading = !Game.client.getEnemyString(Game.user).equals("");
+    //boolean loading = !Game.client.getEnemyString(Game.user).equals("");
     switch (level)
     {
       case 0:
@@ -83,12 +83,12 @@ public class LevelMap
         break;
     }
     
-    //if (loading)
-    //{
-    //loadEnemyList();
-    //System.out.println("loading...");
-    //return;
-    //}
+    /*if (loading)
+    {
+        loadEnemyList();
+        System.out.println("loading...");
+        return;
+    }*/
     
     if(level == 0)
     {

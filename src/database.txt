@@ -1,5 +1,2 @@
-tempPlayer 0 MarySue true true false 32 32 0 16 10 4 100 100 40 MarySue true true false 160 160 0 16 10 4 100 100 40 MarySue true true false 320 32 0 16 10 4 100 100 40 TomIzzo true false false 544 384 41 13 5 0 0 100 30 Sparty true false false 640 320 24 10 7 4 4 100 15 Sparty true false false 640 384 24 10 7 4 4 100 15 
-newPlayer 0 MarySue true true false 32 32 100 100 10 100 100 100 3 MarySue true true false 160 160 100 100 10 100 100 100 3 MarySue true true false 320 32 100 100 10 100 100 100 3
- Christian Bator 0 MarySue true true false 32 32 100 100 10 100 100 100 3 MarySue true true false 160 160 100 100 10 100 100 100 3 MarySue true true false 320 32 100 100 10 100 100 100 3
- jackBeanstalk 0 MarySue true true false 32 32 100 100 10 100 100 100 3 MarySue true true false 160 160 100 100 10 100 100 100 3 MarySue true true false 320 32 100 100 10 100 100 100 3
- harryPotter 0 MarySue true true false 32 32 100 100 10 100 100 100 3 MarySue true true false 160 160 100 100 10 100 100 100 3 MarySue true true false 320 32 100 100 10 100 100 100 3
+ HermioneGranger 0 MarySue true true false 32 32 100 100 10 100 100 100 3 MarySue true true false 160 160 100 100 10 100 100 100 3 MarySue true true false 320 32 100 100 10 100 100 100 3
+ obama 0 MarySue true true false 32 32 100 100 10 100 100 100 3 MarySue true true false 160 160 100 100 10 100 100 100 3 MarySue true true false 320 32 100 100 10 100 100 100 3

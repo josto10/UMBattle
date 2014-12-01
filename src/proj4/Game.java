@@ -25,6 +25,7 @@ public class Game extends BasicGameState
   private Sprite warlock;
   private boolean attackEngaged;
   private static boolean battleOutputShowing;
+  public static boolean isNewGame;
   private Image selectedMenu;
   private Image deselectedMenu;
   private Image attackConfirmation;
@@ -91,6 +92,12 @@ public class Game extends BasicGameState
      map.init(levelNum);
      
     user = userName;
+    
+    if (isNewGame)
+    {
+        // DO SOMETHING
+    }
+    
     if (!client.doesPlayerExist(userName))
     {
         client.addPlayer(userName);
