@@ -99,12 +99,15 @@ public class Game extends BasicGameState
     {
         client.resetPlayer(user);
         
-        openingText = new Image("data/WINNER.png");
-        isOpeningTextShowing = true;
+       // openingText = new Image("data/WINNER.jpg");
+        //isOpeningTextShowing = true;
     }
      
      // Get the map
      currentLevel = loadFriendlies();
+     
+     System.out.println("Level = " + currentLevel);
+     
      map = new LevelMap();
      map.init(levelNum, (!isNewGame));
   
@@ -536,6 +539,7 @@ public class Game extends BasicGameState
     else
     {
       ((UMBattle)game).setLevel(currentLevel + 1);
+      SaveScreen.gameReference = this;
       game.enterState(3);
     }
   }
@@ -608,7 +612,7 @@ public class Game extends BasicGameState
     return Math.sqrt(xDiff + yDiff);
   }
 
-  private void saveGame()
+  public void saveGame()
   {
       System.out.println(toString());
       

@@ -17,6 +17,7 @@ public class SaveScreen extends BasicGameState
 
   Image winner;
   public int nextLevel;
+  public static BasicGameState gameReference;
 
   public SaveScreen(int id)
   {
@@ -68,6 +69,8 @@ public class SaveScreen extends BasicGameState
       if (Mouse.isButtonDown(0))
       {
         System.out.println("Save and Continue");
+        
+        ((Game)gameReference).saveGame();
         ((UMBattle) sbg).help(nextLevel, Game.user);
         sbg.enterState(1);
       }
@@ -79,6 +82,8 @@ public class SaveScreen extends BasicGameState
       if (Mouse.isButtonDown(0))
       {
         System.out.println("Save and Quit");
+        
+        ((Game)gameReference).saveGame();
         sbg.enterState(0);
       }
     }
