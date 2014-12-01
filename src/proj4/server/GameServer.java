@@ -136,7 +136,7 @@ public class GameServer
           msg = "Player does not exist. Save unsuccessful.";
           break;
         }
-        msg = database.savePlayer(user);
+        msg = database.savePlayer(user + sc.nextLine());
         break;
       case "DOESPLAYEREXIST":
         msg = String.valueOf(database.hasPlayer(sc.next()));

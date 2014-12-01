@@ -21,8 +21,7 @@ public class EnemyTurn
   {
 
     while ((mover.getMovesLeft() != 0) && (isWithinOne(mover, MoveToX, MoveToY) == false))
-    {
-
+    { 
       if ((MoveToX > mover.getPosX()) && (map.isOccupied(mover.getPosX() + 32, mover.getPosY(), targetList) == null)
               && (!map.isBlocked(mover.getPosX() + 32, mover.getPosY())))
       {

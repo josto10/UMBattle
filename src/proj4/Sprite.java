@@ -8,14 +8,11 @@ import org.newdawn.slick.SlickException;
 
 abstract public class Sprite
 {
-
   public static final int NUM_VARIABLES = 9;
   public static final int NUM_BOOLS = 3;
   protected Animation sprite, idle, moved, moving, selected;
   protected float x = 32f, y = 32f;
-
   protected Stack<Location> moves;
-
   protected int health;
   protected int attack;
   protected int defense;
@@ -31,7 +28,6 @@ abstract public class Sprite
   public Sprite() throws SlickException
   {
     // set up images
-      
     String imageFilePath = "data/" + getType();
       
     Image[] standing =
@@ -187,8 +183,7 @@ abstract public class Sprite
     }
     return false;
   }
-
-  // should use inherited
+  
   abstract public void draw();
 
   public float getPosX()
@@ -310,30 +305,26 @@ abstract public class Sprite
 
   abstract public String getType();
 
-  /**
-   *
-   * @return (separated by spaces) 1) type 2) x 3) y 4)
-   */
+  //@return (separated by spaces) 1) type 2) x 3) y 4)
+   
   @Override
   public String toString()
   {
     String outString = "";
 
     outString += getType() + " ";
-    //
-    outString += available + " "; //0
-    outString += friendly + " "; //1
-    outString += isSelected + " "; //2
-    //
-    outString += (int) x + " "; //0
-    outString += (int) y + " "; //1
-    outString += health + " "; //2
-    outString += attack + " "; //3
-    outString += defense + " "; //4
-    outString += bounds + " "; //5
-    outString += moves_left + " "; //6
-    outString += accuracy + " "; //7
-    outString += avoid; //8
+    outString += available + " "; 
+    outString += friendly + " "; 
+    outString += isSelected + " "; 
+    outString += (int) x + " "; 
+    outString += (int) y + " "; 
+    outString += health + " "; 
+    outString += attack + " "; 
+    outString += defense + " "; 
+    outString += bounds + " "; 
+    outString += moves_left + " "; 
+    outString += accuracy + " "; 
+    outString += avoid; 
 
     return outString;
   }

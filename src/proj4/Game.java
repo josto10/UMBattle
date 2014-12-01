@@ -14,6 +14,7 @@ import proj4.server.GameClient;
 public class Game extends BasicGameState
 {
   public static final int TOTAL_NUM_LEVELS = 2;
+  public static boolean iWantToLoad;
   private int currentLevel;
   private float MoveToX = 32;
   private float MoveToY = 32;
@@ -42,14 +43,14 @@ public class Game extends BasicGameState
   public Game(int ID)
   {
     super();
-//      client.startClient();
+    client.startClient();
   }
 
    public void init(GameContainer container, StateBasedGame game) throws SlickException
    {
      //container.setVSync(true);
      container.setShowFPS(false);
-        container.setTargetFrameRate(60);
+     container.setTargetFrameRate(60);
      container.setSmoothDeltas(true);
      characterData = new TextField(container, container.getDefaultFont(), 1056, 608, 128, 192);
      characterData.setTextColor(new Color(255, 255, 255));
@@ -67,48 +68,49 @@ public class Game extends BasicGameState
      battleOutput.setTextColor(new Color(255, 255, 255));
      battleOutput.setBackgroundColor(new Color(0,0,0,0.75f));
         
-        
-        characterData.deactivate();
-        characterData.setConsumeEvents(false);
-        characterData.setFocus(false);
-        characterData.setCursorVisible(false);
-        
-        enemyData.deactivate();
-        enemyData.setConsumeEvents(false);
-        enemyData.setFocus(false);
-        enemyData.setCursorVisible(false);
+    characterData.deactivate();
+    characterData.setConsumeEvents(false);
+    characterData.setFocus(false);
+    characterData.setCursorVisible(false);
+
+    enemyData.deactivate();
+    enemyData.setConsumeEvents(false);
+    enemyData.setFocus(false);
+    enemyData.setCursorVisible(false);
    }
 
-   public void initNewLevel(int levelNum) throws SlickException
+   public void initNewLevel(int levelNum, String userName) throws SlickException
    {
+    user = userName;
+       
      // Get the map
      map = new LevelMap();
      currentLevel = levelNum;
      map.init(levelNum);
 
-
-     // initialize the default values ** maybe go in the normal init?? **
      selectedMenu = new Image("data/SelectedMenu.png");
      deselectedMenu = new Image("data/DeselectedMenu.png");
      attackConfirmation = new Image("data/attackConfirmation.png");
      battleOutputShowing = false;
 
-     // Get friendly list size from player data when we instantiate
-     friendlyList = new Sprite[3];
-     friendlyList[0] = new MarySue();
-     friendlyList[1] = new MarySue();
-     friendlyList[2] = new MarySue();
-     friendlyList[0].setX(32);
-     friendlyList[0].setY(32);
-     friendlyList[1].setX(160);
-     friendlyList[1].setY(160);
-     friendlyList[2].setX(320);
-     friendlyList[2].setY(32);
-
-     // Load friendly list from server
-//       loadFriendlies();
-
-     // no selection
+     if (iWantToLoad)
+     {
+         loadFriendlies();
+     }
+     else
+     {
+         friendlyList = new Sprite[3];
+         friendlyList[0] = new MarySue();
+         friendlyList[1] = new MarySue();
+         friendlyList[2] = new MarySue();
+         friendlyList[0].setX(32);
+         friendlyList[0].setY(32);
+         friendlyList[1].setX(160);
+         friendlyList[1].setY(160);
+         friendlyList[2].setX(320);
+         friendlyList[2].setY(32);
+     }
+  
      wizard = null;
    }
 
@@ -130,6 +132,14 @@ public class Game extends BasicGameState
      testPortal = wizard.moveToward(MoveToX, MoveToY, delta);
      wizard.update(delta);
      if (testPortal) advanceLevel(game);
+    }
+    
+    for (Sprite enemy : map.getEnemyList())
+    {
+      if (enemy != null)
+      {
+        enemy.update(delta);
+      }
     }
   }
 
@@ -320,7 +330,7 @@ public class Game extends BasicGameState
     // End Turn menu option selected
     if (posX > 1056 && posY < 192 && posY > 128)
       {
-        System.exit(0);
+          System.exit(0);
       }
       else if (posX > 1056 && posY < 128 && posY > 64)
       {
@@ -328,8 +338,8 @@ public class Game extends BasicGameState
       }
       else if (posX > 1056 && posY < 64 && posY > 0)
       {
-        endPlayerTurn();
-        return;
+          endPlayerTurn();
+          return;
       }
 
     posX = (posX / 32) * 32;
@@ -591,6 +601,8 @@ public class Game extends BasicGameState
 
   private void saveGame()
   {
+      System.out.println(toString());
+      
       try
       {
           System.out.println(client.savePlayer("tempPlayer", toString()));

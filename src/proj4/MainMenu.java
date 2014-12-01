@@ -5,14 +5,18 @@
  */
 package proj4;
 
+import java.awt.Font;
 import org.lwjgl.input.Mouse;
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.MouseListener;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.gui.TextField;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.*;
 
 /**
  *
@@ -20,11 +24,8 @@ import org.newdawn.slick.state.StateBasedGame;
  */
 public class MainMenu extends BasicGameState
 {
-  // Image for images for buttons
-  //Image playNow;
-  //Image exitGame;
-
   Image backGround;
+  private TextField nameInput;
 
   public MainMenu(int ID)
   {
@@ -33,7 +34,19 @@ public class MainMenu extends BasicGameState
 
   public void init(GameContainer container, StateBasedGame game) throws SlickException
   {
-    backGround = new Image("data/mainMenu.png");
+    backGround = new Image("data/MainMenu.png");
+    
+    Font awtFont = new Font("Times New Roman", Font.BOLD, 48);
+    TrueTypeFont ttf = new TrueTypeFont(awtFont, false);
+   
+    nameInput = new TextField(container, ttf, 370, 230, 440, 60);
+    nameInput.setTextColor(new Color(255, 255, 255));
+    nameInput.setBorderColor(new Color(0,0,0,0.0f));
+    nameInput.setBackgroundColor(new Color(0,0,0,0.0f));
+    nameInput.setMaxLength(30);
+    nameInput.setConsumeEvents(true);
+    nameInput.setFocus(true);
+    nameInput.setCursorVisible(true);
   }
 
   public void enter(GameContainer container, StateBasedGame game) throws SlickException
@@ -49,6 +62,7 @@ public class MainMenu extends BasicGameState
   public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException
   {
     backGround.draw(0, 0);
+    nameInput.render(gc, g);
   }
 
   public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException
@@ -71,7 +85,8 @@ public class MainMenu extends BasicGameState
     {
       if (Mouse.isButtonDown(0))
       {
-        ((UMBattle) sbg).help(0);
+        Game.iWantToLoad = true;
+        ((UMBattle) sbg).help(0, nameInput.getText());
         sbg.enterState(1);
       }
     }

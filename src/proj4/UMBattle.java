@@ -50,10 +50,10 @@ public class UMBattle extends StateBasedGame
     this.addState(new WinnerScreen(WINNERSCREEN));
     this.addState(new SaveScreen(SAVESCREEN));
   }
-
-  public void help(int level) throws SlickException
+  
+  public void help(int level, String userName) throws SlickException
   {
-    ((Game) getState(GAME)).initNewLevel(level);
+    ((Game) getState(GAME)).initNewLevel(level, userName);
   }
 
   public void setLevel(int level) throws SlickException

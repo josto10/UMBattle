@@ -54,28 +54,42 @@ public class LevelMap
   
   private void initEnemyList(int level) throws SlickException
   {
-//    boolean loading = !Game.client.getEnemyString(Game.user).equals("");
+    // boolean loading = !Game.client.getEnemyString(Game.user).equals("");
     switch (level)
     {
       case 0:
         //portal: 17, 12
         portal = new Location(32f * 17, 32f * 12);
         break;
+          
       case 1:
         //portal: 15, 12
         portal = new Location(32f * 15, 32f * 12);
         break;
+          
       case 2:
         //portal: 32, 18
         portal = new Location(32f * 32, 32f * 18);
         break;
+          
+      case 3:
+        //portal: 32, 18
+        portal = new Location(32f * 32, 32f * 18);
+        break;
+          
+      case 4:
+        //portal: 32, 18
+        portal = new Location(32f * 32, 32f * 18);
+        break;
     }
-//    if (loading)
-//    {
-//      loadEnemyList();
-//      System.out.println("loading...");
-//      return;
-//    }
+    
+    //if (loading)
+    //{
+    //loadEnemyList();
+    //System.out.println("loading...");
+    //return;
+    //}
+    
     if(level == 0)
     {
       enemyList = new Sprite[3];
@@ -109,6 +123,32 @@ public class LevelMap
         enemyList[x].setY(x * 32);
       }
     }
+    else if(level == 3)
+    {
+      enemyList = new Sprite[16];
+      enemyList[0] = new Izzo();
+      enemyList[0].setX(32 * 32);
+      enemyList[0].setY(18 * 32);
+      for (int x = 1; x < 15; x++)
+      {
+        enemyList[x] = new Sparty();
+        enemyList[x].setX(2 * 32);
+        enemyList[x].setY(x * 32);
+      }
+    }
+    else if(level == 4)
+    {
+      enemyList = new Sprite[16];
+      enemyList[0] = new Izzo();
+      enemyList[0].setX(32 * 32);
+      enemyList[0].setY(18 * 32);
+      for (int x = 1; x < 15; x++)
+      {
+        enemyList[x] = new Sparty();
+        enemyList[x].setX(2 * 32);
+        enemyList[x].setY(x * 32);
+      }
+    }
   }
   
   public String getMapFile(int level)
@@ -122,6 +162,14 @@ public class LevelMap
       return "data/BigHouse.tmx";
     }
     else if(level == 2)
+    {
+      return "data/CCLittle.tmx";
+    }
+    else if(level == 3)
+    {
+      return "data/CCLittle.tmx";
+    }
+    else if(level == 4)
     {
       return "data/CCLittle.tmx";
     }
@@ -173,7 +221,6 @@ public class LevelMap
       }
       
     }
-    
     
     return null;
   }

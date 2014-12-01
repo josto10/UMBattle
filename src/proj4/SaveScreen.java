@@ -25,7 +25,7 @@ public class SaveScreen extends BasicGameState
 
   public void init(GameContainer container, StateBasedGame game) throws SlickException
   {
-    winner = new Image("data/Saver.png");
+    winner = new Image("data/SaveContinueScreen.png");
   }
 
   public void enter(GameContainer container, StateBasedGame game) throws SlickException
@@ -52,7 +52,7 @@ public class SaveScreen extends BasicGameState
     {
       if (Mouse.isButtonDown(0))
       {
-        ((UMBattle) sbg).help(nextLevel);
+        ((UMBattle) sbg).help(nextLevel, Game.user);
         sbg.enterState(1);
       }
     }
